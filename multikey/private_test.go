@@ -18,15 +18,17 @@ import (
 	"testing"
 
 	"github.com/mailchain/mailchain/crypto"
+	"github.com/mailchain/mailchain/crypto/ed25519/ed25519test"
+	"github.com/mailchain/mailchain/crypto/secp256k1/secp256k1test"
 	"github.com/mailchain/mailchain/internal/testutil"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPrivateKeyFromHex(t *testing.T) {
+func TestPrivateKeyFromBytes(t *testing.T) {
 	assert := assert.New(t)
 	type args struct {
 		hex     string
-		keyType string
+		keyType []byte
 	}
 	tests := []struct {
 		name    string
@@ -35,19 +37,28 @@ func TestPrivateKeyFromHex(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			"ethereum",
+			"secp256k1",
 			args{
-				"01901E63389EF02EAA7C5782E08B40D98FAEF835F28BD144EECF5614A415943F",
 				"secp256k1",
+				testutil.MustHexDecodeString("01901E63389EF02EAA7C5782E08B40D98FAEF835F28BD144EECF5614A415943F"),
 			},
-			testutil.SofiaPrivateKey,
+			secp256k1test.SofiaPrivateKey,
+			false,
+		},
+		{
+			"ed25519",
+			args{
+				"ed25519",
+				testutil.MustHexDecodeString("0d9b4a3c10721991c6b806f0f343535dc2b46c74bece50a0a0d6b9f0070d3157"),
+			},
+			ed25519test.SofiaPrivateKey,
 			false,
 		},
 		{
 			"err",
 			args{
-				"01901E63389EF02EAA7C5782E08B40D98FAEF835F28BD144EECF5614A415943F",
 				"unknown",
+				testutil.MustHexDecodeString("01901E63389EF02EAA7C5782E08B40D98FAEF835F28BD144EECF5614A415943F"),
 			},
 			nil,
 			true,
@@ -55,13 +66,13 @@ func TestPrivateKeyFromHex(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := PrivateKeyFromHex(tt.args.hex, tt.args.keyType)
+			got, err := PrivateKeyFromBytes(tt.args.hex, tt.args.keyType)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("PrivateKeyFromHex() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("PrivateKeyFromBytes() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !assert.Equal(tt.want, got) {
-				t.Errorf("PrivateKeyFromHex() = %v, want %v", got, tt.want)
+				t.Errorf("PrivateKeyFromBytes() = %v, want %v", got, tt.want)
 			}
 		})
 	}

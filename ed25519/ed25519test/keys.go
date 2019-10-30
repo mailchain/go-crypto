@@ -1,10 +1,11 @@
-package secp256k1test
+package ed25519test
 
 import (
 	"log"
 
 	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/secp256k1"
+	"github.com/mailchain/mailchain/crypto/ed25519"
+	"github.com/mailchain/mailchain/internal/testutil"
 )
 
 var SofiaPrivateKey crypto.PrivateKey     // nolint: gochecknoglobals
@@ -15,13 +16,14 @@ var CharlottePublicKey crypto.PublicKey   // nolint: gochecknoglobals
 // nolint: gochecknoinits
 func init() {
 	var err error
-	SofiaPrivateKey, err = secp256k1.PrivateKeyFromHex("01901E63389EF02EAA7C5782E08B40D98FAEF835F28BD144EECF5614A415943F")
+	SofiaPrivateKey, err = ed25519.PrivateKeyFromBytes(testutil.MustHexDecodeString("0d9b4a3c10721991c6b806f0f343535dc2b46c74bece50a0a0d6b9f0070d3157"))
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	SofiaPublicKey = SofiaPrivateKey.PublicKey()
 
-	CharlottePrivateKey, err = secp256k1.PrivateKeyFromHex("DF4BA9F6106AD2846472F759476535E55C5805D8337DF5A11C3B139F438B98B3")
+	CharlottePrivateKey, err = ed25519.PrivateKeyFromBytes(testutil.MustHexDecodeString("39d4c97d6a7f9e3306a2b5aae604ee67ec8b1387fffb39128fc055656cff05bb"))
 	if err != nil {
 		log.Fatal(err)
 	}
