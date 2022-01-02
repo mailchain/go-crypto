@@ -78,7 +78,7 @@ func PrivateKeyFromBytes(privKey []byte) (*PrivateKey, error) {
 		seed := [seedSize]byte{}
 		copy(seed[:], privKey)
 
-		return &PrivateKey{secretKey: schnorrkel.NewSecretKeyED25519(seed)}, nil
+		return &PrivateKey{secretKey: schnorrkel.NewSecretKeySR25519(seed)}, nil
 	default:
 		return nil, errors.Errorf("sr25519: bad key length")
 	}

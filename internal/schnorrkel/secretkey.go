@@ -21,7 +21,7 @@ func (sk *SecretKey) Nonce() []byte {
 	return sk.nonce[:]
 }
 
-func NewSecretKeyED25519(seed [32]byte) SecretKey {
+func NewSecretKeySR25519(seed [32]byte) SecretKey {
 	key := [32]byte{}
 	nonce := [32]byte{}
 	h := sha512.Sum512(seed[:])

@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewSecretKeyED25519(t *testing.T) {
+func TestNewSecretKeySR25519(t *testing.T) {
 	type args struct {
 		seed [32]byte
 	}
@@ -41,8 +41,8 @@ func TestNewSecretKeyED25519(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewSecretKeyED25519(tt.args.seed); !assert.Equal(t, tt.want, got) {
-				t.Errorf("NewSecretKeyED25519() = %v, want %v", got, tt.want)
+			if got := NewSecretKeySR25519(tt.args.seed); !assert.Equal(t, tt.want, got) {
+				t.Errorf("NewSecretKeySR25519() = %v, want %v", got, tt.want)
 			}
 		})
 	}
