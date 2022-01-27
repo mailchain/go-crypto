@@ -7,7 +7,7 @@ import (
 
 var ( //nolint
 	aliceSeed       = encodingtest.MustDecodeHex("5c6d7adf75bda1180c225d25f3aa8dc174bbfb3cddee11ae9a85982f6faf791a") //nolint: lll
-	alicePrivateKey = PrivateKey{secretKey: schnorrkel.NewSecretKeyED25519(func() [32]byte {
+	alicePrivateKey = PrivateKey{secretKey: schnorrkel.NewSecretKeySR25519(func() [32]byte {
 		s := [32]byte{}
 		copy(s[:], aliceSeed)
 		return s
@@ -16,7 +16,7 @@ var ( //nolint
 	alicePublicKey       = PublicKey{key: alicePublicKeyBytes}                                                                                                                                                                   //nolint: lll
 	alicePublicKeyBytes  = []byte{0x16, 0x9a, 0x11, 0x72, 0x18, 0x51, 0xf5, 0xdf, 0xf3, 0x54, 0x1d, 0xd5, 0xc4, 0xb0, 0xb4, 0x78, 0xac, 0x1c, 0xd0, 0x92, 0xc9, 0xd5, 0x97, 0x6e, 0x83, 0xda, 0xa0, 0xd0, 0x3f, 0x26, 0x62, 0xc} //nolint: lll
 	bobSeed              = encodingtest.MustDecodeHex("23b063a581fd8e5e847c4e2b9c494247298791530f5293be369e8bf23a45d2bd")                                                                                                        //nolint: lll
-	bobPrivateKey        = PrivateKey{secretKey: schnorrkel.NewSecretKeyED25519(func() [32]byte {
+	bobPrivateKey        = PrivateKey{secretKey: schnorrkel.NewSecretKeySR25519(func() [32]byte {
 		s := [32]byte{}
 		copy(s[:], bobSeed)
 		return s

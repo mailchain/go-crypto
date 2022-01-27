@@ -35,3 +35,23 @@ func PublicKeyFromBytes(keyType string, data []byte) (crypto.PublicKey, error) {
 		return nil, errors.Errorf("unsupported curve type")
 	}
 }
+
+func DescriptivePublicKeyFromBytes(in []byte) (crypto.PublicKey, error) {
+	if len(in) <= 1 {
+		return nil, errors.New("input must contain id and public key")
+	}
+
+	keyType := in[0]
+	data := in[1:] // skip the id byte and return rest
+
+	switch keyType {
+	case crypto.IDSECP256K1:
+		return secp256k1.PublicKeyFromBytes(data)
+	case crypto.IDED25519:
+		return ed25519.PublicKeyFromBytes(data)
+	case crypto.IDSR25519:
+		return sr25519.PublicKeyFromBytes(data)
+	default:
+		return nil, errors.Errorf("unsupported curve type")
+	}
+}

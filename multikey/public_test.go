@@ -17,6 +17,7 @@ package multikey
 import (
 	"testing"
 
+	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/ed25519/ed25519test"
 	"github.com/mailchain/mailchain/crypto/secp256k1/secp256k1test"
 	"github.com/mailchain/mailchain/crypto/sr25519/sr25519test"
@@ -88,6 +89,70 @@ func TestPublicKeyFromBytes(t *testing.T) {
 				}
 			}
 
+		})
+	}
+}
+
+func TestDescriptivePublicKeyFromBytes(t *testing.T) {
+	type args struct {
+		in []byte
+	}
+	tests := []struct {
+		name      string
+		args      args
+		wantBytes []byte
+		wantErr   bool
+	}{
+		{
+			"secp256k1",
+			args{
+				append([]byte{crypto.IDSECP256K1}, secp256k1test.AlicePublicKey.Bytes()...),
+			},
+			secp256k1test.AlicePublicKey.Bytes(),
+			false,
+		},
+		{
+			"ed25519",
+			args{
+				append([]byte{crypto.IDED25519}, ed25519test.AlicePublicKey.Bytes()...),
+			},
+			ed25519test.AlicePublicKey.Bytes(),
+			false,
+		},
+		{
+			"sr25519",
+			args{
+				append([]byte{crypto.IDSR25519}, sr25519test.AlicePublicKey.Bytes()...),
+			},
+			sr25519test.AlicePublicKey.Bytes(),
+			false,
+		},
+		{
+			"err",
+			args{
+				append([]byte{0x00}, sr25519test.AlicePublicKey.Bytes()...),
+			},
+			nil,
+			true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := DescriptivePublicKeyFromBytes(tt.args.in)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("DescriptivePublicKeyFromBytes() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got != nil {
+				if !assert.EqualValues(t, tt.wantBytes, got.Bytes()) {
+					t.Errorf("DescriptivePublicKeyFromBytes() = %v, want %v", got, tt.wantBytes)
+				}
+			}
+			if got == nil {
+				if !assert.Nil(t, tt.wantBytes) {
+					t.Errorf("DescriptivePublicKeyFromBytes() = %v, want %v", got, tt.wantBytes)
+				}
+			}
 		})
 	}
 }
