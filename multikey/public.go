@@ -55,3 +55,16 @@ func DescriptivePublicKeyFromBytes(in []byte) (crypto.PublicKey, error) {
 		return nil, errors.Errorf("unsupported curve type")
 	}
 }
+
+func DescriptiveBytesFromPublicKey(in crypto.PublicKey) ([]byte, error) {
+	idByte, err := IDFromPublicKey(in)
+	if err != nil {
+		return nil, err
+	}
+
+	out := make([]byte, len(in.Bytes())+1)
+	out[0] = idByte
+	copy(out[1:], in.Bytes())
+
+	return out, nil
+}

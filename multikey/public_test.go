@@ -156,3 +156,55 @@ func TestDescriptivePublicKeyFromBytes(t *testing.T) {
 		})
 	}
 }
+
+func TestDescriptiveBytesFromPublicKey(t *testing.T) {
+	type args struct {
+		in crypto.PublicKey
+	}
+	tests := []struct {
+		name      string
+		args      args
+		want      []byte
+		assertion assert.ErrorAssertionFunc
+	}{
+		{
+			"secp256k1",
+			args{
+				secp256k1test.AlicePublicKey,
+			},
+			append([]byte{crypto.IDSECP256K1}, secp256k1test.AlicePublicKey.Bytes()...),
+			assert.NoError,
+		},
+		{
+			"ed25519",
+			args{
+				ed25519test.AlicePublicKey,
+			},
+			append([]byte{crypto.IDED25519}, ed25519test.AlicePublicKey.Bytes()...),
+			assert.NoError,
+		},
+		{
+			"sr25519",
+			args{
+				sr25519test.AlicePublicKey,
+			},
+			append([]byte{crypto.IDSR25519}, sr25519test.AlicePublicKey.Bytes()...),
+			assert.NoError,
+		},
+		{
+			"err",
+			args{
+				nil,
+			},
+			nil,
+			assert.Error,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := DescriptiveBytesFromPublicKey(tt.args.in)
+			tt.assertion(t, err)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
