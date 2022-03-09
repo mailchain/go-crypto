@@ -29,3 +29,20 @@ func SignEthereumPersonalMessage(key crypto.PrivateKey, message []byte) ([]byte,
 		return nil, ErrKeyNotSupported
 	}
 }
+
+func VerifyEthereumPersonalMessage(key crypto.PublicKey, message, signature []byte) (bool, error) {
+	switch pk := key.(type) {
+	case *secp256k1.PublicKey:
+		// VerifySignature requires the signature to be in
+		// [ R || S ] format, so we remove the recid if present.
+		if len(signature) == 65 {
+			signature = signature[:64]
+		}
+
+		hash, _ := accounts.TextAndHash(message)
+
+		return ethcrypto.VerifySignature(ethcrypto.CompressPubkey(pk.ECDSA()), hash, signature), nil
+	default:
+		return false, ErrKeyNotSupported
+	}
+}

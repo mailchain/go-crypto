@@ -57,3 +57,75 @@ func TestSignEthereumPersonalMessage(t *testing.T) {
 		})
 	}
 }
+
+func TestVerifyEthereumPersonalMessage(t *testing.T) {
+	type args struct {
+		key       crypto.PublicKey
+		message   []byte
+		signature []byte
+	}
+	tests := []struct {
+		name      string
+		args      args
+		want      bool
+		assertion assert.ErrorAssertionFunc
+	}{
+		{
+			"secp256k1-alice",
+			args{
+				secp256k1test.AlicePublicKey,
+				[]byte("hello"),
+				encodingtest.MustDecodeHex("1a8cb54a9fd44f18e0799b081fb725b54409e46f9d6ddb2c2e720de1c60c66030a9038c28a2d0c5a68def8fcb5359ca7bceb5afe943424d610fa91cda27cf1221c"),
+			},
+			true,
+			assert.NoError,
+		},
+		{
+			"secp256k1-alice-incorrect-message",
+			args{
+				secp256k1test.AlicePublicKey,
+				[]byte("wrong message"),
+				encodingtest.MustDecodeHex("1a8cb54a9fd44f18e0799b081fb725b54409e46f9d6ddb2c2e720de1c60c66030a9038c28a2d0c5a68def8fcb5359ca7bceb5afe943424d610fa91cda27cf1221c"),
+			},
+			false,
+			assert.NoError,
+		},
+		{
+			"secp256k1-bob",
+			args{
+				secp256k1test.BobPublicKey,
+				[]byte("hello"),
+				encodingtest.MustDecodeHex("cbf4e3962fd6e9c711cb622bceb4205649437792c395a772fe452e802964a91a6734bbd6cbad4a42fa57fe2f2a664ef627152a0cf257f0341b0f960c224422881b"),
+			},
+			true,
+			assert.NoError,
+		},
+		{
+			"secp256k1-bob-incorrect-message",
+			args{
+				secp256k1test.BobPublicKey,
+				[]byte("wrong message"),
+				encodingtest.MustDecodeHex("cbf4e3962fd6e9c711cb622bceb4205649437792c395a772fe452e802964a91a6734bbd6cbad4a42fa57fe2f2a664ef627152a0cf257f0341b0f960c224422881b"),
+			},
+			false,
+			assert.NoError,
+		},
+		{
+			"ed25519-alice",
+			args{
+				ed25519test.AlicePublicKey,
+				[]byte("hello"),
+				nil,
+			},
+			false,
+			assert.Error,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := VerifyEthereumPersonalMessage(tt.args.key, tt.args.message, tt.args.signature)
+			tt.assertion(t, err)
+			assert.Equal(t, tt.want, got)
+		})
+	}
+}
