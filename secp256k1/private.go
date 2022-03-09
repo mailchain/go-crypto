@@ -45,6 +45,7 @@ func (pk PrivateKey) Bytes() []byte {
 	return ethcrypto.FromECDSA(&pk.ecdsa)
 }
 
+// TODO: remove this sign function
 // Sign signs the message with the private key and returns the signature.
 func (pk PrivateKey) Sign(message []byte) (signature []byte, err error) {
 	hash := sha256.Sum256(message)
