@@ -19,6 +19,7 @@ import (
 	"github.com/mailchain/mailchain/crypto/ed25519"
 	"github.com/mailchain/mailchain/crypto/secp256k1"
 	"github.com/mailchain/mailchain/crypto/sr25519"
+	"github.com/mailchain/mailchain/encoding"
 	"github.com/pkg/errors"
 )
 
@@ -34,6 +35,15 @@ func PublicKeyFromBytes(keyType string, data []byte) (crypto.PublicKey, error) {
 	default:
 		return nil, errors.Errorf("unsupported curve type")
 	}
+}
+
+func DescriptivePublicKeyFromEncodedString(in string, encodedWith string) (crypto.PublicKey, error) {
+	decodedBytes, err := encoding.Decode(in, encodedWith)
+	if err != nil {
+		return nil, err
+	}
+
+	return DescriptivePublicKeyFromBytes(decodedBytes)
 }
 
 func DescriptivePublicKeyFromBytes(in []byte) (crypto.PublicKey, error) {
