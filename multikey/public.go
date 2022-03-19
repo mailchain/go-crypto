@@ -38,7 +38,7 @@ func PublicKeyFromBytes(keyType string, data []byte) (crypto.PublicKey, error) {
 }
 
 func DescriptivePublicKeyFromEncodedString(in string, encodedWith string) (crypto.PublicKey, error) {
-	decodedBytes, err := encoding.Decode(in, encodedWith)
+	decodedBytes, err := encoding.Decode(encodedWith, in)
 	if err != nil {
 		return nil, err
 	}
