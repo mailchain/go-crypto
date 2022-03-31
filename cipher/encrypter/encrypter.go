@@ -25,7 +25,7 @@ func GetEncrypter(encryption string, pubKey keys.PublicKey) (crypto.Encrypter, e
 	case AES256CBC:
 		return aes256cbc.NewEncrypter(pubKey)
 	case NACLECDH:
-		return nacl.NewEncrypter(pubKey)
+		return nacl.NewPublicKeyEncrypter(pubKey)
 	case NoOperation:
 		return noop.NewEncrypter(pubKey)
 	case "":

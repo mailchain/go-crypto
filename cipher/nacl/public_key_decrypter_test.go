@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewDecrypter(t *testing.T) {
+func TestNewPublicKeyDecrypter(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
@@ -25,7 +25,7 @@ func TestNewDecrypter(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    *Decrypter
+		want    *PublicKeyDecrypter
 		wantErr bool
 	}{
 		{
@@ -33,7 +33,7 @@ func TestNewDecrypter(t *testing.T) {
 			args{
 				ed25519test.BobPrivateKey,
 			},
-			&Decrypter{
+			&PublicKeyDecrypter{
 				privateKey: ed25519test.BobPrivateKey,
 				keyExchange: func() cipher.KeyExchange {
 					k, _ := ecdh.NewED25519(rand.Reader)
@@ -47,7 +47,7 @@ func TestNewDecrypter(t *testing.T) {
 			args{
 				sr25519test.BobPrivateKey,
 			},
-			&Decrypter{
+			&PublicKeyDecrypter{
 				privateKey: sr25519test.BobPrivateKey,
 				keyExchange: func() cipher.KeyExchange {
 					k, _ := ecdh.NewSR25519(rand.Reader)
@@ -61,7 +61,7 @@ func TestNewDecrypter(t *testing.T) {
 			args{
 				secp256k1test.BobPrivateKey,
 			},
-			&Decrypter{
+			&PublicKeyDecrypter{
 				privateKey: secp256k1test.BobPrivateKey,
 				keyExchange: func() cipher.KeyExchange {
 					k, _ := ecdh.NewSECP256K1(rand.Reader)
@@ -80,19 +80,19 @@ func TestNewDecrypter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := NewDecrypter(tt.args.privateKey)
+			got, err := NewPublicKeyDecrypter(tt.args.privateKey)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("NewDecrypter() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("NewPublicKeyDecrypter() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !assert.Equal(t, tt.want, got) {
-				t.Errorf("NewDecrypter() = %v, want %v", got, tt.want)
+				t.Errorf("NewPublicKeyDecrypter() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestDecrypter_Decrypt(t *testing.T) {
+func TestPublicKeyDecrypter_Decrypt(t *testing.T) {
 	type fields struct {
 		privateKey  crypto.PrivateKey
 		keyExchange cipher.KeyExchange
@@ -260,17 +260,17 @@ func TestDecrypter_Decrypt(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			d := Decrypter{
+			d := PublicKeyDecrypter{
 				privateKey:  tt.fields.privateKey,
 				keyExchange: tt.fields.keyExchange,
 			}
 			got, err := d.Decrypt(tt.args.data)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Decrypter.Decrypt() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("PublicKeyDecrypter.Decrypt() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !assert.Equal(t, tt.want, got) {
-				t.Errorf("Decrypter.Decrypt() = %v, want %v", got, tt.want)
+				t.Errorf("PublicKeyDecrypter.Decrypt() = %v, want %v", got, tt.want)
 			}
 		})
 	}

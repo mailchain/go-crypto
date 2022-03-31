@@ -25,6 +25,9 @@ const (
 	// for key exchange and share secret generation.
 	NACLECDH byte = 0x2a
 
+	// NACLSecretKey indenified for nacl secret key encryption.
+	NACLSecretKey byte = 0x2b
+
 	// AES256CBC identified for Encrypt and Decrypter in aes256cbc package.
 	AES256CBC byte = 0x2e
 )

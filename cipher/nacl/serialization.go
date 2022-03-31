@@ -41,8 +41,8 @@ func pubKeyElements(pubKey crypto.PublicKey) (id byte, data []byte, err error) {
 	return
 }
 
-// serializeSecret encode the encrypted data to the hex format
-func serializeSecret(data cipher.EncryptedContent, pubKey crypto.PublicKey) (cipher.EncryptedContent, error) {
+// serializePublicKeyEncryptedContent encode the encrypted data to the hex format
+func serializePublicKeyEncryptedContent(data cipher.EncryptedContent, pubKey crypto.PublicKey) (cipher.EncryptedContent, error) {
 	pkID, pkBytes, err := pubKeyElements(pubKey)
 	if err != nil {
 		return nil, err
@@ -58,8 +58,17 @@ func serializeSecret(data cipher.EncryptedContent, pubKey crypto.PublicKey) (cip
 	return encodedData, nil
 }
 
-// deserializeSecret convert the hex format in to the encrypted data format
-func deserializeSecret(raw cipher.EncryptedContent) (cph cipher.EncryptedContent, pubKey crypto.PublicKey, err error) {
+func serializePrivateKeyEncryptedContent(sealedBox cipher.EncryptedContent, keyID byte) cipher.EncryptedContent {
+	out := make(cipher.EncryptedContent, 2+len(sealedBox))
+	out[0] = cipher.NACLSecretKey
+	out[1] = byte(keyID)
+	copy(out[2:], sealedBox)
+
+	return out
+}
+
+// deserializePublicKeyEncryptedContent convert the hex format in to the encrypted data format
+func deserializePublicKeyEncryptedContent(raw cipher.EncryptedContent) (cph cipher.EncryptedContent, pubKey crypto.PublicKey, err error) {
 	if raw[0] != cipher.NACLECDH {
 		return nil, nil, errors.Errorf("invalid prefix")
 	}
@@ -83,4 +92,17 @@ func deserializeSecret(raw cipher.EncryptedContent) (cph cipher.EncryptedContent
 	}
 
 	return cph, pubKey, err
+}
+
+// deserializePrivateKeyEncryptedContent convert the hex format in to the encrypted data format
+func deserializePrivateKeyEncryptedContent(raw cipher.EncryptedContent) (cph cipher.EncryptedContent, keyID byte, err error) {
+	if raw[0] != cipher.NACLSecretKey {
+		return nil, 0x0, errors.Errorf("invalid prefix")
+	}
+
+	if len(raw) < 3 {
+		return nil, 0x0, errors.Errorf("cipher is too short") // will result in error is less than this
+	}
+
+	return raw[2:], raw[1], err
 }

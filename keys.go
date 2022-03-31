@@ -18,6 +18,8 @@ const (
 	IDED25519 = 0xe2
 	// IDSR25519 byte identifier for sr25519 keys.
 	IDSR25519 = 0xe3
+	// IDNonSpecified Id identifier for non specified secret keys.
+	IDNonSpecified = 0xee
 )
 
 var CurveKindIDMapping = map[string]byte{ //nolint:gochecknoglobals

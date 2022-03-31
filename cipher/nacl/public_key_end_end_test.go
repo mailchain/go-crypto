@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestEncryptDecrypt(t *testing.T) {
+func TestPublicKeyEncryptDecrypt(t *testing.T) {
 	cases := []struct {
 		name                string
 		recipientPublicKey  crypto.PublicKey
@@ -106,12 +106,12 @@ func TestEncryptDecrypt(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			encrypter, _ := NewEncrypter(tc.recipientPublicKey)
+			encrypter, _ := NewPublicKeyEncrypter(tc.recipientPublicKey)
 			encrypted, err := encrypter.Encrypt(tc.data)
 			assert.Equal(t, tc.err, err)
 			assert.NotNil(t, encrypted)
 
-			decrypter, _ := NewDecrypter(tc.recipientPrivateKey)
+			decrypter, _ := NewPublicKeyDecrypter(tc.recipientPrivateKey)
 			decrypted, err := decrypter.Decrypt(encrypted)
 			assert.Equal(t, tc.err, err)
 			assert.Equal(t, tc.data, []byte(decrypted))

@@ -6,25 +6,25 @@ import (
 	"github.com/pkg/errors"
 )
 
-// NewDecrypter create a new decrypter attaching the private key to it
-func NewDecrypter(privateKey crypto.PrivateKey) (*Decrypter, error) {
+// NewPublicKeyDecrypter create a new decrypter attaching the private key to it
+func NewPublicKeyDecrypter(privateKey crypto.PrivateKey) (*PublicKeyDecrypter, error) {
 	keyExchange, err := getPrivateKeyExchange(privateKey)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	return &Decrypter{privateKey: privateKey, keyExchange: keyExchange}, nil
+	return &PublicKeyDecrypter{privateKey: privateKey, keyExchange: keyExchange}, nil
 }
 
-// Decrypter will decrypt data using NACL with ECDH key exchange
-type Decrypter struct {
+// PublicKeyDecrypter will decrypt data using NACL with ECDH key exchange
+type PublicKeyDecrypter struct {
 	privateKey  crypto.PrivateKey
 	keyExchange cipher.KeyExchange
 }
 
 // Decrypt data using recipient private key with AES in CBC mode.
-func (d Decrypter) Decrypt(data cipher.EncryptedContent) (cipher.PlainContent, error) {
-	data, pubKey, err := deserializeSecret(data)
+func (d PublicKeyDecrypter) Decrypt(data cipher.EncryptedContent) (cipher.PlainContent, error) {
+	data, pubKey, err := deserializePublicKeyEncryptedContent(data)
 	if err != nil {
 		return nil, err
 	}

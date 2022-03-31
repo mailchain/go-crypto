@@ -20,7 +20,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewEncrypter(t *testing.T) {
+func TestNewPublicKeyEncrypter(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
@@ -30,7 +30,7 @@ func TestNewEncrypter(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    *Encrypter
+		want    *PublicKeyEncrypter
 		wantErr bool
 	}{
 		{
@@ -38,7 +38,7 @@ func TestNewEncrypter(t *testing.T) {
 			args{
 				ed25519test.BobPublicKey,
 			},
-			&Encrypter{
+			&PublicKeyEncrypter{
 				rand:      rand.Reader,
 				publicKey: ed25519test.BobPublicKey,
 				keyExchange: func() cipher.KeyExchange {
@@ -53,7 +53,7 @@ func TestNewEncrypter(t *testing.T) {
 			args{
 				sr25519test.BobPublicKey,
 			},
-			&Encrypter{
+			&PublicKeyEncrypter{
 				rand:      rand.Reader,
 				publicKey: sr25519test.BobPublicKey,
 				keyExchange: func() cipher.KeyExchange {
@@ -68,7 +68,7 @@ func TestNewEncrypter(t *testing.T) {
 			args{
 				secp256k1test.BobPublicKey,
 			},
-			&Encrypter{
+			&PublicKeyEncrypter{
 				rand:      rand.Reader,
 				publicKey: secp256k1test.BobPublicKey,
 				keyExchange: func() cipher.KeyExchange {
@@ -89,20 +89,20 @@ func TestNewEncrypter(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := NewEncrypter(tt.args.publicKey)
+			got, err := NewPublicKeyEncrypter(tt.args.publicKey)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("NewEncrypter() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("NewPublicKeyEncrypter() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 
 			if !assert.Equal(t, tt.want, got) {
-				t.Errorf("NewEncrypter() = %v, want %v", got, tt.want)
+				t.Errorf("NewPublicKeyEncrypter() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestEncrypter_Encrypt(t *testing.T) {
+func TestPublicKeyEncrypter_Encrypt(t *testing.T) {
 	mockCtrl := gomock.NewController(t)
 	defer mockCtrl.Finish()
 
@@ -272,18 +272,18 @@ func TestEncrypter_Encrypt(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := Encrypter{
+			e := PublicKeyEncrypter{
 				rand:        tt.fields.rand,
 				publicKey:   tt.fields.publicKey,
 				keyExchange: tt.fields.keyExchange,
 			}
 			got, err := e.Encrypt(tt.args.message)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Encrypter.Encrypt() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("PublicKeyEncrypter.Encrypt() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !assert.Equal(t, tt.want, got) {
-				t.Errorf("Encrypter.Encrypt() = %v, want %v", got, tt.want)
+				t.Errorf("PublicKeyEncrypter.Encrypt() = %v, want %v", got, tt.want)
 			}
 		})
 	}

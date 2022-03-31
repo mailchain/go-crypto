@@ -9,26 +9,26 @@ import (
 	"github.com/pkg/errors"
 )
 
-// NewEncrypter creates a new encrypter with crypto rand for reader,
+// NewPublicKeyEncrypter creates a new encrypter with crypto rand for reader,
 // and attaching the public key to the encrypter.
-func NewEncrypter(publicKey crypto.PublicKey) (*Encrypter, error) {
+func NewPublicKeyEncrypter(publicKey crypto.PublicKey) (*PublicKeyEncrypter, error) {
 	keyExchange, err := getPublicKeyExchange(publicKey)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	return &Encrypter{rand: rand.Reader, publicKey: publicKey, keyExchange: keyExchange}, nil
+	return &PublicKeyEncrypter{rand: rand.Reader, publicKey: publicKey, keyExchange: keyExchange}, nil
 }
 
-// Encrypter will encrypt data using AES256CBC method.
-type Encrypter struct {
+// PublicKeyEncrypter will encrypt data using AES256CBC method.
+type PublicKeyEncrypter struct {
 	rand        io.Reader
 	publicKey   crypto.PublicKey
 	keyExchange cipher.KeyExchange
 }
 
 // Encrypt encrypts the message with the key that was attached to it.
-func (e Encrypter) Encrypt(message cipher.PlainContent) (cipher.EncryptedContent, error) {
+func (e PublicKeyEncrypter) Encrypt(message cipher.PlainContent) (cipher.EncryptedContent, error) {
 	ephemeralKey, err := e.keyExchange.EphemeralKey()
 	if err != nil {
 		return nil, err
@@ -44,5 +44,5 @@ func (e Encrypter) Encrypt(message cipher.PlainContent) (cipher.EncryptedContent
 		return nil, err
 	}
 
-	return serializeSecret(encrypted, ephemeralKey.PublicKey())
+	return serializePublicKeyEncryptedContent(encrypted, ephemeralKey.PublicKey())
 }

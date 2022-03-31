@@ -56,7 +56,7 @@ func TestGetEncrypter(t *testing.T) {
 				secp256k1test.AlicePublicKey,
 			},
 			func() cipher.Encrypter {
-				encrypter, _ := nacl.NewEncrypter(secp256k1test.AlicePublicKey)
+				encrypter, _ := nacl.NewPublicKeyEncrypter(secp256k1test.AlicePublicKey)
 				return encrypter
 			}(),
 			false,

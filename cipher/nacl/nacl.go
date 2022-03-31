@@ -2,6 +2,7 @@ package nacl
 
 import (
 	"errors"
+	"fmt"
 	"io"
 
 	"golang.org/x/crypto/nacl/secretbox"
@@ -14,6 +15,7 @@ func easyOpen(box, key []byte) ([]byte, error) {
 	var secretKey [secretKeySize]byte
 
 	if len(key) != secretKeySize {
+		fmt.Println("len(key)", len(key))
 		return nil, errors.New("secretbox: key length must be 32")
 	}
 
