@@ -1,6 +1,8 @@
 package keys
 
 import (
+	"errors"
+
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/multikey"
 	"github.com/mailchain/mailchain/encoding"
@@ -14,6 +16,9 @@ func EncodeMessagingPublicKey(key crypto.PublicKey) (string, error) {
 	descriptiveKey, err := multikey.DescriptiveBytesFromPublicKey(key)
 	if err != nil {
 		return "", err
+	}
+	if descriptiveKey[0] == crypto.IDSECP256K1 {
+		return "", errors.New("secp256k1 not supported")
 	}
 
 	return encoding.EncodeBase58(append(PrefixMsgKey, descriptiveKey...)), nil

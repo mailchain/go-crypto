@@ -141,8 +141,6 @@ func TestEncodeMessagingPublicKey(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := EncodeMessagingPublicKey(tt.args.key)
-			println("encoded len:", len(got))
-			println("bytes len:", len(tt.args.key.Bytes()))
 			tt.assertion(t, err)
 			assert.Equal(t, tt.want, got)
 		})
