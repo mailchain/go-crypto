@@ -7,6 +7,7 @@ import (
 	"github.com/mailchain/mailchain/crypto/ed25519/ed25519test"
 	"github.com/mailchain/mailchain/crypto/secp256k1/secp256k1test"
 	"github.com/mailchain/mailchain/encoding/encodingtest"
+	"github.com/mailchain/mailchain/testing/asserterror"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -46,7 +47,7 @@ func TestSignEthereumPersonalMessage(t *testing.T) {
 				[]byte("hello"),
 			},
 			nil,
-			assert.Error,
+			asserterror.EqualError(ErrKeyNotSupported),
 		},
 	}
 	for _, tt := range tests {
@@ -118,7 +119,7 @@ func TestVerifyEthereumPersonalMessage(t *testing.T) {
 				nil,
 			},
 			false,
-			assert.Error,
+			asserterror.EqualError(ErrKeyNotSupported),
 		},
 	}
 	for _, tt := range tests {
