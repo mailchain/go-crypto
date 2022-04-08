@@ -6,7 +6,7 @@ import (
 	"golang.org/x/crypto/ed25519"
 )
 
-// PublicKey based on the secp256k1 curve
+// PublicKey based on the ed25519 curve
 type PublicKey struct {
 	key ed25519.PublicKey
 }
