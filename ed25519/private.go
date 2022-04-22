@@ -32,7 +32,7 @@ func (pk PrivateKey) PublicKey() crypto.PublicKey {
 	publicKey := make([]byte, ed25519.PublicKeySize)
 	copy(publicKey, pk.Key[32:])
 
-	return &PublicKey{key: publicKey}
+	return &PublicKey{Key: publicKey}
 }
 
 // PrivateKeyFromBytes get a private key from seed []byte
