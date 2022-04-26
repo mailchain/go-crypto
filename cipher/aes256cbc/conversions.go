@@ -15,10 +15,11 @@
 package aes256cbc
 
 import (
+	"fmt"
+
 	"github.com/ethereum/go-ethereum/crypto/ecies"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/secp256k1"
-	"github.com/pkg/errors"
 )
 
 func asPublicECIES(pk crypto.PublicKey) (*ecies.PublicKey, error) {
@@ -28,7 +29,7 @@ func asPublicECIES(pk crypto.PublicKey) (*ecies.PublicKey, error) {
 	case secp256k1.PublicKey:
 		return rpk.ECIES()
 	default:
-		return nil, errors.Errorf("could not convert public key")
+		return nil, fmt.Errorf("could not convert public key")
 	}
 }
 func asPrivateECIES(pk crypto.PrivateKey) (*ecies.PrivateKey, error) {
@@ -38,6 +39,6 @@ func asPrivateECIES(pk crypto.PrivateKey) (*ecies.PrivateKey, error) {
 	case secp256k1.PrivateKey:
 		return rpk.ECIES(), nil
 	default:
-		return nil, errors.Errorf("could not convert private key")
+		return nil, fmt.Errorf("could not convert private key")
 	}
 }

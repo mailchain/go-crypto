@@ -3,14 +3,13 @@ package nacl
 import (
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/pkg/errors"
 )
 
 // NewPublicKeyDecrypter create a new decrypter attaching the private key to it
 func NewPublicKeyDecrypter(privateKey crypto.PrivateKey) (*PublicKeyDecrypter, error) {
 	keyExchange, err := getPrivateKeyExchange(privateKey)
 	if err != nil {
-		return nil, errors.WithStack(err)
+		return nil, err
 	}
 
 	return &PublicKeyDecrypter{privateKey: privateKey, keyExchange: keyExchange}, nil

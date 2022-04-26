@@ -7,7 +7,6 @@ import (
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/cipher"
 	"github.com/mailchain/mailchain/crypto/multikey"
-	"github.com/pkg/errors"
 )
 
 // NewPrivateKeyEncrypter creates a new encrypter with crypto rand for reader,
@@ -15,7 +14,7 @@ import (
 func NewPrivateKeyEncrypter(privateKey crypto.PrivateKey) (*PrivateKeyEncrypter, error) {
 	keyExchange, err := getPrivateKeyExchange(privateKey)
 	if err != nil {
-		return nil, errors.WithStack(err)
+		return nil, err
 	}
 
 	return &PrivateKeyEncrypter{rand: rand.Reader, privateKey: privateKey, keyExchange: keyExchange}, nil

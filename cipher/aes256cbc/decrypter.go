@@ -18,18 +18,18 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/subtle"
+	"errors"
 
 	"github.com/andreburgaud/crypt2go/padding"
 	"github.com/mailchain/mailchain/crypto"
 	mc "github.com/mailchain/mailchain/crypto/cipher"
 	"github.com/mailchain/mailchain/crypto/secp256k1"
-	"github.com/pkg/errors"
 )
 
 // NewDecrypter create a new decrypter attaching the private key to it
 func NewDecrypter(privateKey crypto.PrivateKey) (*Decrypter, error) {
 	if err := validatePrivateKeyType(privateKey); err != nil {
-		return nil, errors.WithStack(err)
+		return nil, err
 	}
 
 	return &Decrypter{privateKey: privateKey}, nil

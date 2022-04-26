@@ -6,7 +6,6 @@ import (
 
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/pkg/errors"
 )
 
 // NewPublicKeyEncrypter creates a new encrypter with crypto rand for reader,
@@ -14,7 +13,7 @@ import (
 func NewPublicKeyEncrypter(publicKey crypto.PublicKey) (*PublicKeyEncrypter, error) {
 	keyExchange, err := getPublicKeyExchange(publicKey)
 	if err != nil {
-		return nil, errors.WithStack(err)
+		return nil, err
 	}
 
 	return &PublicKeyEncrypter{rand: rand.Reader, publicKey: publicKey, keyExchange: keyExchange}, nil

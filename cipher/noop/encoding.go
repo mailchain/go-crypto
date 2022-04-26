@@ -15,8 +15,9 @@
 package noop
 
 import (
+	"fmt"
+
 	"github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/pkg/errors"
 )
 
 // bytesEncode encode the encrypted data to the hex format
@@ -31,7 +32,7 @@ func bytesEncode(data cipher.EncryptedContent) cipher.EncryptedContent {
 // bytesDecode convert the hex format in to the encrypted data format
 func bytesDecode(raw cipher.EncryptedContent) (cipher.EncryptedContent, error) {
 	if raw[0] != cipher.NoOperation {
-		return nil, errors.Errorf("invalid prefix")
+		return nil, fmt.Errorf("invalid prefix")
 	}
 
 	return raw[1:], nil

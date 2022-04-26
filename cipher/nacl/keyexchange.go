@@ -2,6 +2,7 @@ package nacl
 
 import (
 	"crypto/rand"
+	"fmt"
 
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/cipher"
@@ -9,7 +10,6 @@ import (
 	"github.com/mailchain/mailchain/crypto/ed25519"
 	"github.com/mailchain/mailchain/crypto/secp256k1"
 	"github.com/mailchain/mailchain/crypto/sr25519"
-	"github.com/pkg/errors"
 )
 
 func getPublicKeyExchange(recipientPublicKey crypto.PublicKey) (cipher.KeyExchange, error) {
@@ -21,7 +21,7 @@ func getPublicKeyExchange(recipientPublicKey crypto.PublicKey) (cipher.KeyExchan
 	case secp256k1.PublicKey, *secp256k1.PublicKey:
 		return ecdh.NewSECP256K1(rand.Reader)
 	default:
-		return nil, errors.Errorf("invalid public key type for nacl encryption")
+		return nil, fmt.Errorf("invalid public key type for nacl encryption")
 	}
 }
 
@@ -34,6 +34,6 @@ func getPrivateKeyExchange(pk crypto.PrivateKey) (cipher.KeyExchange, error) {
 	case *secp256k1.PrivateKey:
 		return ecdh.NewSECP256K1(rand.Reader)
 	default:
-		return nil, errors.Errorf("invalid private key type for nacl decryption")
+		return nil, fmt.Errorf("invalid private key type for nacl decryption")
 	}
 }

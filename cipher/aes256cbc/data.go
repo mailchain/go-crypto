@@ -14,7 +14,7 @@
 
 package aes256cbc
 
-import "github.com/pkg/errors"
+import "errors"
 
 type encryptedData struct {
 	InitializationVector      []byte `json:"iv"`
@@ -25,19 +25,19 @@ type encryptedData struct {
 
 func (e *encryptedData) verify() error {
 	if len(e.InitializationVector) != 16 {
-		return errors.Errorf("`InitializationVector` must be 16")
+		return errors.New("`InitializationVector` must be 16")
 	}
 
 	if len(e.EphemeralPublicKey) != 65 {
-		return errors.Errorf("`EphemeralPublicKey` must be 65")
+		return errors.New("`EphemeralPublicKey` must be 65")
 	}
 
 	if len(e.MessageAuthenticationCode) != 32 {
-		return errors.Errorf("`MessageAuthenticationCode` must be 16")
+		return errors.New("`MessageAuthenticationCode` must be 16")
 	}
 
 	if len(e.Ciphertext) == 0 {
-		return errors.Errorf("`Ciphertext` must not be empty")
+		return errors.New("`Ciphertext` must not be empty")
 	}
 
 	return nil

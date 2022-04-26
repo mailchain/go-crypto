@@ -1,7 +1,8 @@
 package ed25519
 
 import (
-	"github.com/pkg/errors"
+	"fmt"
+
 	"golang.org/x/crypto/ed25519"
 )
 
@@ -23,7 +24,7 @@ func (pk PublicKey) Bytes() []byte {
 // PublicKeyFromBytes create a public key from []byte
 func PublicKeyFromBytes(keyBytes []byte) (*PublicKey, error) {
 	if len(keyBytes) != ed25519.PublicKeySize {
-		return nil, errors.Errorf("public key must be 32 bytes")
+		return nil, fmt.Errorf("public key must be 32 bytes")
 	}
 
 	return &PublicKey{Key: keyBytes}, nil

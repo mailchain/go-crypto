@@ -15,18 +15,19 @@
 package aes256cbc
 
 import (
+	"fmt"
+
 	"github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/pkg/errors"
 )
 
 // bytesEncode encode the encrypted data to the hex format
 func bytesEncode(data *encryptedData) ([]byte, error) {
 	if err := data.verify(); err != nil {
-		return nil, errors.WithMessage(err, "encrypted data is invalid")
+		return nil, fmt.Errorf("encrypted data is invalid: %w", err)
 	}
 	compressedKey, err := compress(data.EphemeralPublicKey)
 	if err != nil {
-		return nil, errors.WithMessage(err, "could not compress EphemeralPublicKey")
+		return nil, fmt.Errorf("could not compress EphemeralPublicKey: %w", err)
 	}
 	encodedData := make([]byte, 1+len(data.InitializationVector)+len(compressedKey)+len(data.MessageAuthenticationCode)+len(data.Ciphertext))
 	encodedData[0] = cipher.AES256CBC
@@ -42,15 +43,15 @@ func bytesDecode(raw []byte) (*encryptedData, error) {
 	macLen := 32
 	ivLen := 16
 	if len(raw) == 0 {
-		return nil, errors.Errorf("raw must not be empty")
+		return nil, fmt.Errorf("raw must not be empty")
 	}
 
 	if len(raw) < macLen+ivLen+pubKeyBytesLenCompressed+1 {
-		return nil, errors.Errorf("raw data does not have enough bytes to be encoded")
+		return nil, fmt.Errorf("raw data does not have enough bytes to be encoded")
 	}
 
 	if raw[0] != cipher.AES256CBC {
-		return nil, errors.Errorf("invalid prefix")
+		return nil, fmt.Errorf("invalid prefix")
 	}
 	raw = raw[1:]
 	decompressedKey := decompress(raw[ivLen : ivLen+pubKeyBytesLenCompressed])
@@ -67,7 +68,7 @@ func bytesDecode(raw []byte) (*encryptedData, error) {
 		Ciphertext:                raw[ivLen+pubKeyBytesLenCompressed+macLen:],
 	}
 	if err := ret.verify(); err != nil {
-		return nil, errors.WithMessage(err, "encrypted data is invalid")
+		return nil, fmt.Errorf("encrypted data is invalid: %w", err)
 	}
 
 	return ret, nil

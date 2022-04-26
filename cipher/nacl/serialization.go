@@ -15,12 +15,14 @@
 package nacl
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/cipher"
 	"github.com/mailchain/mailchain/crypto/ed25519"
 	"github.com/mailchain/mailchain/crypto/secp256k1"
 	"github.com/mailchain/mailchain/crypto/sr25519"
-	"github.com/pkg/errors"
 )
 
 func pubKeyElements(pubKey crypto.PublicKey) (id byte, data []byte, err error) {
@@ -70,11 +72,11 @@ func serializePrivateKeyEncryptedContent(sealedBox cipher.EncryptedContent, keyI
 // deserializePublicKeyEncryptedContent convert the hex format in to the encrypted data format
 func deserializePublicKeyEncryptedContent(raw cipher.EncryptedContent) (cph cipher.EncryptedContent, pubKey crypto.PublicKey, err error) {
 	if raw[0] != cipher.NACLECDH {
-		return nil, nil, errors.Errorf("invalid prefix")
+		return nil, nil, fmt.Errorf("invalid prefix")
 	}
 
 	if len(raw) < 35 {
-		return nil, nil, errors.Errorf("cipher is too short") // will result in error is less than this
+		return nil, nil, fmt.Errorf("cipher is too short") // will result in error is less than this
 	}
 
 	switch raw[1] {
@@ -97,11 +99,11 @@ func deserializePublicKeyEncryptedContent(raw cipher.EncryptedContent) (cph ciph
 // deserializePrivateKeyEncryptedContent convert the hex format in to the encrypted data format
 func deserializePrivateKeyEncryptedContent(raw cipher.EncryptedContent) (cph cipher.EncryptedContent, keyID byte, err error) {
 	if raw[0] != cipher.NACLSecretKey {
-		return nil, 0x0, errors.Errorf("invalid prefix")
+		return nil, 0x0, fmt.Errorf("invalid prefix")
 	}
 
 	if len(raw) < 3 {
-		return nil, 0x0, errors.Errorf("cipher is too short") // will result in error is less than this
+		return nil, 0x0, fmt.Errorf("cipher is too short") // will result in error is less than this
 	}
 
 	return raw[2:], raw[1], err

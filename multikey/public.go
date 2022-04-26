@@ -15,12 +15,14 @@
 package multikey
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/ed25519"
 	"github.com/mailchain/mailchain/crypto/secp256k1"
 	"github.com/mailchain/mailchain/crypto/sr25519"
 	"github.com/mailchain/mailchain/encoding"
-	"github.com/pkg/errors"
 )
 
 // PublicKeyFromBytes use the correct function to get the private key from bytes
@@ -33,7 +35,7 @@ func PublicKeyFromBytes(keyType string, data []byte) (crypto.PublicKey, error) {
 	case crypto.KindSR25519:
 		return sr25519.PublicKeyFromBytes(data)
 	default:
-		return nil, errors.Errorf("unsupported curve type")
+		return nil, fmt.Errorf("unsupported curve type")
 	}
 }
 
@@ -62,7 +64,7 @@ func DescriptivePublicKeyFromBytes(in []byte) (crypto.PublicKey, error) {
 	case crypto.IDSR25519:
 		return sr25519.PublicKeyFromBytes(data)
 	default:
-		return nil, errors.Errorf("unsupported curve type")
+		return nil, fmt.Errorf("unsupported curve type")
 	}
 }
 

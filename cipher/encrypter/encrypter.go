@@ -1,12 +1,13 @@
 package encrypter
 
 import (
+	"fmt"
+
 	keys "github.com/mailchain/mailchain/crypto"
 	crypto "github.com/mailchain/mailchain/crypto/cipher"
 	"github.com/mailchain/mailchain/crypto/cipher/aes256cbc"
 	"github.com/mailchain/mailchain/crypto/cipher/nacl"
 	"github.com/mailchain/mailchain/crypto/cipher/noop"
-	"github.com/pkg/errors"
 )
 
 // Cipher Name lookup
@@ -29,8 +30,8 @@ func GetEncrypter(encryption string, pubKey keys.PublicKey) (crypto.Encrypter, e
 	case NoOperation:
 		return noop.NewEncrypter(pubKey)
 	case "":
-		return nil, errors.Errorf("`encryption` provided is set to empty")
+		return nil, fmt.Errorf("`encryption` provided is set to empty")
 	default:
-		return nil, errors.Errorf("`encryption` provided is invalid")
+		return nil, fmt.Errorf("`encryption` provided is invalid")
 	}
 }

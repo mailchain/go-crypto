@@ -1,10 +1,11 @@
 package ed25519
 
 import (
+	"errors"
+	"fmt"
 	"io"
 
 	"github.com/mailchain/mailchain/crypto"
-	"github.com/pkg/errors"
 	"golang.org/x/crypto/ed25519"
 )
 
@@ -43,7 +44,7 @@ func PrivateKeyFromBytes(privKey []byte) (*PrivateKey, error) {
 	case ed25519.PrivateKeySize:
 		return &PrivateKey{Key: privKey}, nil
 	default:
-		return nil, errors.Errorf("ed25519: bad key length")
+		return nil, fmt.Errorf("ed25519: bad key length")
 	}
 }
 

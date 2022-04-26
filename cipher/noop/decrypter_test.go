@@ -15,11 +15,11 @@
 package noop
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 
 	"github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/pkg/errors"
 )
 
 func TestNewDecrypter(t *testing.T) {
@@ -70,7 +70,7 @@ func TestDecrypter_Decrypt(t *testing.T) {
 				cipher.EncryptedContent([]byte("test content")),
 			},
 			nil,
-			errors.Errorf("invalid prefix"),
+			fmt.Errorf("invalid prefix"),
 			true,
 		},
 	}

@@ -1,13 +1,13 @@
 package sr25519
 
 import (
+	"fmt"
 	"io"
 
 	"github.com/gtank/merlin"
 	"github.com/gtank/ristretto255"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/internal/schnorrkel"
-	"github.com/pkg/errors"
 )
 
 const (
@@ -80,7 +80,7 @@ func PrivateKeyFromBytes(privKey []byte) (*PrivateKey, error) {
 
 		return &PrivateKey{secretKey: schnorrkel.NewSecretKeySR25519(seed)}, nil
 	default:
-		return nil, errors.Errorf("sr25519: bad key length")
+		return nil, fmt.Errorf("sr25519: bad key length")
 	}
 }
 

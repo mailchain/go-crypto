@@ -16,10 +16,10 @@ package aes256cbc
 
 import (
 	"crypto/elliptic"
+	"fmt"
 
 	"github.com/ethereum/go-ethereum/crypto/ecies"
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
-	"github.com/pkg/errors"
 )
 
 const (
@@ -34,7 +34,7 @@ func compress(publicKey []byte) ([]byte, error) {
 		publicKey = append([]byte{compressedKeyPrefix}, publicKey...)
 	}
 	if len(publicKey) != pubKeyBytesLenUncompressed {
-		return nil, errors.Errorf("length of uncompressed public key is invalid")
+		return nil, fmt.Errorf("length of uncompressed public key is invalid")
 	}
 	x, y := elliptic.Unmarshal(ecies.DefaultCurve, publicKey)
 

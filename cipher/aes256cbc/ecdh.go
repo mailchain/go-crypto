@@ -19,10 +19,10 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"crypto/sha512"
+	"errors"
 	"io"
 
 	"github.com/ethereum/go-ethereum/crypto/ecies"
-	"github.com/pkg/errors"
 )
 
 // deriveSharedSecret create a shared secret between public and private key.

@@ -17,13 +17,14 @@ package secp256k1
 import (
 	"crypto/ecdsa"
 	"crypto/sha256"
+	"errors"
+	"fmt"
 	"io"
 	"math/big"
 
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/crypto/ecies"
 	"github.com/mailchain/mailchain/crypto"
-	"github.com/pkg/errors"
 )
 
 var (
@@ -66,8 +67,10 @@ func (pk PrivateKey) ECIES() *ecies.PrivateKey {
 // ECDSA returns an ECDSA representation of the private key.
 func (pk PrivateKey) ECDSA() (*ecdsa.PrivateKey, error) {
 	rpk, err := ethcrypto.ToECDSA(pk.Bytes())
-
-	return rpk, errors.WithMessage(err, "could not convert private key")
+	if err != nil {
+		return nil, fmt.Errorf("could not convert private key: %w", err)
+	}
+	return rpk, nil
 }
 
 // PrivateKeyFromECDSA get a private key from an ecdsa.PrivateKey.
@@ -86,7 +89,7 @@ func PrivateKeyFromBytes(pk []byte) (*PrivateKey, error) {
 
 	rpk, err := ethcrypto.ToECDSA(pk)
 	if err != nil {
-		return nil, errors.Errorf("could not convert private key")
+		return nil, fmt.Errorf("could not convert private key")
 	}
 
 	return &PrivateKey{ecdsa: *rpk}, nil

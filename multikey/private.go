@@ -15,11 +15,12 @@
 package multikey
 
 import (
+	"fmt"
+
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/ed25519"
 	"github.com/mailchain/mailchain/crypto/secp256k1"
 	"github.com/mailchain/mailchain/crypto/sr25519"
-	"github.com/pkg/errors"
 )
 
 // PrivateKeyFromBytes returns a private key from `[]byte`.
@@ -35,6 +36,6 @@ func PrivateKeyFromBytes(keyType string, data []byte) (crypto.PrivateKey, error)
 	case crypto.KindSR25519:
 		return sr25519.PrivateKeyFromBytes(data)
 	default:
-		return nil, errors.Errorf("unsupported key type: %q", keyType)
+		return nil, fmt.Errorf("unsupported key type: %q", keyType)
 	}
 }
