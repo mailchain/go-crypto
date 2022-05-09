@@ -1,0 +1,14 @@
+{
+	"root": "crypto",
+	"projectType": "library",
+	"sourceRoot": "crypto",
+	"targets": {
+		"test": {
+			"executor": "@nx-go/nx-go:test"
+		},
+		"lint": {
+			"executor": "@nx-go/nx-go:lint"
+		}
+	},
+	"tags": []
+}
