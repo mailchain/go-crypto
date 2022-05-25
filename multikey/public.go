@@ -64,7 +64,7 @@ func DescriptivePublicKeyFromBytes(in []byte) (crypto.PublicKey, error) {
 	case crypto.IDSR25519:
 		return sr25519.PublicKeyFromBytes(data)
 	default:
-		return nil, fmt.Errorf("unsupported curve type")
+		return nil, fmt.Errorf("first byte must identity key curve")
 	}
 }
 
