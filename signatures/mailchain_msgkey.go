@@ -1,6 +1,7 @@
 package signatures
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/mailchain/mailchain/crypto"
@@ -47,14 +48,16 @@ func SignMailchainProvidedMessagingKey(key crypto.PrivateKey, msgKey crypto.Publ
 		}
 
 		return pk.Sign(msg)
+	case nil:
+		return nil, errors.New("signing key must not be nil")
 	default:
 		return nil, ErrKeyNotSupported
 	}
 }
 
 // VerifyMailchainProvidedMessagingKey verifies a messaging key is provided by Mailchain.
-func VerifyMailchainProvidedMessagingKey(key crypto.PublicKey, signature []byte, msgKey crypto.PublicKey, address string, protocol string) (bool, error) {
-	switch pk := key.(type) {
+func VerifyMailchainProvidedMessagingKey(verifiyingKey crypto.PublicKey, signature []byte, msgKey crypto.PublicKey, address string, protocol string) (bool, error) {
+	switch pk := verifiyingKey.(type) {
 	case *ed25519.PublicKey:
 		msg, err := mailchainProvidedMessagingKeyMessage(msgKey, address, protocol)
 		if err != nil {
@@ -62,7 +65,9 @@ func VerifyMailchainProvidedMessagingKey(key crypto.PublicKey, signature []byte,
 		}
 
 		return pk.Verify(msg, signature), nil
+	case nil:
+		return false, errors.New("verificaiton key must not be nil")
 	default:
-		return false, ErrKeyNotSupported
+		return false, fmt.Errorf("invalid verification key type: %w", ErrKeyNotSupported)
 	}
 }
