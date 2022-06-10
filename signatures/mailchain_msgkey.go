@@ -56,8 +56,8 @@ func SignMailchainProvidedMessagingKey(key crypto.PrivateKey, msgKey crypto.Publ
 }
 
 // VerifyMailchainProvidedMessagingKey verifies a messaging key is provided by Mailchain.
-func VerifyMailchainProvidedMessagingKey(verifiyingKey crypto.PublicKey, signature []byte, msgKey crypto.PublicKey, address string, protocol string) (bool, error) {
-	switch pk := verifiyingKey.(type) {
+func VerifyMailchainProvidedMessagingKey(verifyingKey crypto.PublicKey, signature []byte, msgKey crypto.PublicKey, address string, protocol string) (bool, error) {
+	switch pk := verifyingKey.(type) {
 	case *ed25519.PublicKey:
 		msg, err := mailchainProvidedMessagingKeyMessage(msgKey, address, protocol)
 		if err != nil {

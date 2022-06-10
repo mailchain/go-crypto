@@ -6,7 +6,7 @@ import (
 	"github.com/mailchain/mailchain/crypto"
 )
 
-func Verifiy(signingMethod string, verifyingKey crypto.PublicKey, message []byte, signature []byte) (bool, error) {
+func Verify(signingMethod string, verifyingKey crypto.PublicKey, message []byte, signature []byte) (bool, error) {
 	switch signingMethod {
 	case KindEthereumPersonalMessage:
 		return VerifyEthereumPersonalMessage(verifyingKey, message, signature)
