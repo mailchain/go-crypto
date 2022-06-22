@@ -64,7 +64,7 @@ func TestDecrypter_Decrypt(t *testing.T) {
 			false,
 		},
 		{
-			"fail,invalid prefix",
+			"err-invalid-prefix",
 			NewDecrypter(),
 			args{
 				cipher.EncryptedContent([]byte("test content")),
