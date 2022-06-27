@@ -38,8 +38,8 @@ func mailchainProvidedMessagingKeyMessage(msgKey crypto.PublicKey, address, prot
 	}
 }
 
-// SignMailchainProvidedMessagingKey signs a Mailchian provided messaging key signed by the Mailchain master messaging private key.
-func SignMailchainProvidedMessagingKey(key crypto.PrivateKey, msgKey crypto.PublicKey, address string, protocol string) ([]byte, error) {
+// SignMailchainProvidedMessagingKey signs a Mailchain provided messaging key signed by the Mailchain master messaging private key.
+func SignMailchainProvidedMessagingKey(key crypto.PrivateKey, msgKey crypto.PublicKey, address, protocol string) ([]byte, error) {
 	switch pk := key.(type) {
 	case *ed25519.PrivateKey:
 		msg, err := mailchainProvidedMessagingKeyMessage(msgKey, address, protocol)
@@ -66,7 +66,7 @@ func VerifyMailchainProvidedMessagingKey(verifyingKey crypto.PublicKey, signatur
 
 		return pk.Verify(msg, signature), nil
 	case nil:
-		return false, errors.New("verificaiton key must not be nil")
+		return false, errors.New("verification key must not be nil")
 	default:
 		return false, fmt.Errorf("invalid verification key type: %w", ErrKeyNotSupported)
 	}
