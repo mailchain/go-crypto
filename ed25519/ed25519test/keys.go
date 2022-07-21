@@ -1,3 +1,9 @@
+// Package ed25519test contains keys that are used to ease testing of Mailchain
+// functionality.
+// All keys in this package are publicly known and therefore compromised. Keys
+// MUST not be used on any live networks, as secrets, or for any purpose other
+// than creating a reproducible unsecured test.
+
 package ed25519test
 
 import (
@@ -17,6 +23,11 @@ var BobPrivateKey crypto.PrivateKey //nolint: gochecknoglobals
 // BobPublicKey ed25519 key for testing purposes. Key is compromised do not use on mainnet's.
 var BobPublicKey crypto.PublicKey //nolint: gochecknoglobals
 
+// CharliePrivateKey ed25519 key for testing purposes. Key is compromised do not use on mainnet's.
+var CharliePrivateKey crypto.PrivateKey //nolint: gochecknoglobals
+// CharliePublicKey ed25519 key for testing purposes. Key is compromised do not use on mainnet's.
+var CharliePublicKey crypto.PublicKey //nolint: gochecknoglobals
+
 //nolint: gochecknoinits
 func init() {
 	var err error
@@ -33,4 +44,11 @@ func init() {
 	}
 
 	BobPublicKey = BobPrivateKey.PublicKey()
+
+	CharliePrivateKey, err = ed25519.PrivateKeyFromBytes(encodingtest.MustDecodeHex("cd81ad6a71da3cbe070c6e73a6ab591a9987a3e6ce2ba2ef6c2a3846ed3cdb08"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	CharliePublicKey = CharliePrivateKey.PublicKey()
 }

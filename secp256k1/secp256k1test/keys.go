@@ -1,3 +1,8 @@
+// Package secp256k1test contains keys that are used to ease testing of Mailchain
+// functionality.
+// All keys in this package are publicly known and therefore compromised. Keys
+// MUST not be used on any live networks, as secrets, or for any purpose other
+// than creating a reproducible unsecured test.
 package secp256k1test
 
 import (
