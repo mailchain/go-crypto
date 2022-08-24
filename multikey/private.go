@@ -25,3 +25,16 @@ func PrivateKeyFromBytes(keyType string, data []byte) (crypto.PrivateKey, error)
 		return nil, fmt.Errorf("unsupported key type: %q", keyType)
 	}
 }
+
+func DescriptiveBytesFromPrivateKey(in crypto.PrivateKey) ([]byte, error) {
+	idByte, err := IDFromPrivateKey(in)
+	if err != nil {
+		return nil, err
+	}
+
+	out := make([]byte, len(in.Bytes())+1)
+	out[0] = idByte
+	copy(out[1:], in.Bytes())
+
+	return out, nil
+}
