@@ -21,12 +21,12 @@ func TestPrivateKey_Bytes(t *testing.T) {
 		{
 			"alice",
 			alicePrivateKey,
-			alicePrivateKeyBytes,
+			aliceKeyPair,
 		},
 		{
 			"bob",
 			bobPrivateKey,
-			bobPrivateKeyBytes,
+			bobKeyPair,
 		},
 	}
 	for _, tt := range tests {

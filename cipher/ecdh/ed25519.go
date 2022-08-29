@@ -75,7 +75,7 @@ func (kx ED25519) privateKey(privKey crypto.PrivateKey) (key [32]byte, err error
 	case *ed25519.PrivateKey:
 		var ed25519Key [64]byte
 
-		copy(ed25519Key[:], pk.Bytes())
+		copy(ed25519Key[:], pk.Key.Seed())
 		extra25519.PrivateKeyToCurve25519(&key, &ed25519Key)
 
 		return key, nil

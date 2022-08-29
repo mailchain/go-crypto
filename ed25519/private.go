@@ -16,7 +16,7 @@ type PrivateKey struct {
 
 // Bytes returns the byte representation of the private key
 func (pk PrivateKey) Bytes() []byte {
-	return pk.Key.Seed()
+	return append(pk.Key.Seed(), pk.PublicKey().Bytes()...)
 }
 
 // Sign signs the message with the private key and returns the signature.

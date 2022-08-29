@@ -23,7 +23,7 @@ func TestDeriveHardenedKey(t *testing.T) {
 		{
 			"alice://0",
 			args{
-				alicePrivateKey,
+				&alicePrivateKey,
 				[]uint64{0},
 			},
 			func() *PrivateKey {
@@ -35,7 +35,7 @@ func TestDeriveHardenedKey(t *testing.T) {
 		{
 			"alice://1",
 			args{
-				alicePrivateKey,
+				&alicePrivateKey,
 				[]uint64{1},
 			},
 			func() *PrivateKey {
@@ -47,7 +47,7 @@ func TestDeriveHardenedKey(t *testing.T) {
 		{
 			"alice://1//2",
 			args{
-				alicePrivateKey,
+				&alicePrivateKey,
 				[]uint64{1, 2},
 			},
 			func() *PrivateKey {
@@ -76,7 +76,7 @@ func TestDeriveHardenedKey(t *testing.T) {
 		{
 			"bob://0",
 			args{
-				bobPrivateKey,
+				&bobPrivateKey,
 				[]uint64{0},
 			},
 			func() *PrivateKey {
@@ -88,7 +88,7 @@ func TestDeriveHardenedKey(t *testing.T) {
 		{
 			"bob://1",
 			args{
-				bobPrivateKey,
+				&bobPrivateKey,
 				[]uint64{1},
 			},
 			func() *PrivateKey {
@@ -100,7 +100,7 @@ func TestDeriveHardenedKey(t *testing.T) {
 		{
 			"bob://1//2",
 			args{
-				bobPrivateKey,
+				&bobPrivateKey,
 				[]uint64{1, 2},
 			},
 			func() *PrivateKey {
@@ -153,7 +153,7 @@ func TestDeriveHardenedKeyString(t *testing.T) {
 		{
 			"bob://1",
 			args{
-				bobPrivateKey,
+				&bobPrivateKey,
 				[]string{"test.string"},
 			},
 			func() *PrivateKey {
