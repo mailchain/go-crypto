@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/mailchain/mailchain/encoding/encodingtest"
+	"github.com/mailchain/encoding/encodingtest"
 	"github.com/stretchr/testify/assert"
 )
 

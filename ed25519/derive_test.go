@@ -3,9 +3,9 @@ package ed25519
 import (
 	"testing"
 
+	"github.com/mailchain/encoding/encodingtest"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/chaincode"
-	"github.com/mailchain/mailchain/encoding/encodingtest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

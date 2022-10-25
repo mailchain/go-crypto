@@ -7,8 +7,8 @@ import (
 	"testing"
 	"testing/iotest"
 
+	"github.com/mailchain/encoding/encodingtest"
 	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/encoding/encodingtest"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -1,7 +1,7 @@
 package ed25519
 
 import (
-	"github.com/mailchain/mailchain/encoding/encodingtest"
+	"github.com/mailchain/encoding/encodingtest"
 )
 
 var (

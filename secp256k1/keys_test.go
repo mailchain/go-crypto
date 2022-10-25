@@ -3,7 +3,7 @@ package secp256k1
 import (
 	"log"
 
-	"github.com/mailchain/mailchain/encoding/encodingtest"
+	"github.com/mailchain/encoding/encodingtest"
 )
 
 var (

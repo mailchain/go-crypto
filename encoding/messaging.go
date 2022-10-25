@@ -3,9 +3,9 @@ package keys
 import (
 	"errors"
 
+	"github.com/mailchain/encoding"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/multikey"
-	"github.com/mailchain/mailchain/encoding"
 )
 
 // PrefixMsgKey creates a prefix of MsgKey that is used in front of the mesage key.

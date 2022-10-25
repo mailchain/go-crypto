@@ -3,11 +3,11 @@ package keys
 import (
 	"testing"
 
+	"github.com/mailchain/encoding"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/ed25519/ed25519test"
 	"github.com/mailchain/mailchain/crypto/secp256k1/secp256k1test"
 	"github.com/mailchain/mailchain/crypto/sr25519/sr25519test"
-	"github.com/mailchain/mailchain/encoding"
 	"github.com/stretchr/testify/assert"
 )
 

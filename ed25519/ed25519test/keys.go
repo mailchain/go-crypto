@@ -9,9 +9,9 @@ package ed25519test
 import (
 	"log"
 
+	"github.com/mailchain/encoding/encodingtest"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/ed25519"
-	"github.com/mailchain/mailchain/encoding/encodingtest"
 )
 
 // AlicePrivateKey ed25519 key for testing purposes. Key is compromised do not use on mainnet's.

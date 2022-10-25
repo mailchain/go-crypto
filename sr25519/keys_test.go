@@ -1,8 +1,8 @@
 package sr25519
 
 import (
+	"github.com/mailchain/encoding/encodingtest"
 	"github.com/mailchain/mailchain/crypto/internal/schnorrkel"
-	"github.com/mailchain/mailchain/encoding/encodingtest"
 )
 
 var ( //nolint
