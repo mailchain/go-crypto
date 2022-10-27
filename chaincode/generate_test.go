@@ -3,7 +3,7 @@ package chaincode
 import (
 	"testing"
 
-	"github.com/mailchain/encoding/encodingtest"
+	"github.com/mailchain/go-encoding/encodingtest"
 	"github.com/stretchr/testify/assert"
 )
 

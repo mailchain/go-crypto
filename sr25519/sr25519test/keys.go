@@ -8,7 +8,7 @@ package sr25519test
 import (
 	"log"
 
-	"github.com/mailchain/encoding/encodingtest"
+	"github.com/mailchain/go-encoding/encodingtest"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/sr25519"
 )

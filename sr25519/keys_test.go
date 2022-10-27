@@ -1,7 +1,7 @@
 package sr25519
 
 import (
-	"github.com/mailchain/encoding/encodingtest"
+	"github.com/mailchain/go-encoding/encodingtest"
 	"github.com/mailchain/mailchain/crypto/internal/schnorrkel"
 )
 

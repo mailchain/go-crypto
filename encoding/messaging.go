@@ -3,7 +3,7 @@ package keys
 import (
 	"errors"
 
-	"github.com/mailchain/encoding"
+	"github.com/mailchain/go-encoding"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/multikey"
 )

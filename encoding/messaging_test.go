@@ -3,7 +3,7 @@ package keys
 import (
 	"testing"
 
-	"github.com/mailchain/encoding"
+	"github.com/mailchain/go-encoding"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/ed25519/ed25519test"
 	"github.com/mailchain/mailchain/crypto/secp256k1/secp256k1test"

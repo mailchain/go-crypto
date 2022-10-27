@@ -3,7 +3,7 @@ package ed25519
 import (
 	"testing"
 
-	"github.com/mailchain/encoding/encodingtest"
+	"github.com/mailchain/go-encoding/encodingtest"
 	"github.com/mailchain/mailchain/crypto"
 	"github.com/mailchain/mailchain/crypto/chaincode"
 	"github.com/stretchr/testify/assert"

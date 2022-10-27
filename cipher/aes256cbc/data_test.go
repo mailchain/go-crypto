@@ -3,7 +3,7 @@ package aes256cbc
 import (
 	"testing"
 
-	"github.com/mailchain/encoding/encodingtest"
+	"github.com/mailchain/go-encoding/encodingtest"
 )
 
 func Test_encryptedData_verify(t *testing.T) {
