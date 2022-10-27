@@ -3,7 +3,7 @@ package ed25519
 import (
 	"errors"
 
-	"github.com/mailchain/mailchain/crypto"
+	"github.com/mailchain/go-crypto"
 	"github.com/minio/blake2b-simd"
 )
 

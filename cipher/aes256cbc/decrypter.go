@@ -7,9 +7,9 @@ import (
 	"errors"
 
 	"github.com/andreburgaud/crypt2go/padding"
-	"github.com/mailchain/mailchain/crypto"
-	mc "github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/mailchain/mailchain/crypto/secp256k1"
+	"github.com/mailchain/go-crypto"
+	mc "github.com/mailchain/go-crypto/cipher"
+	"github.com/mailchain/go-crypto/secp256k1"
 )
 
 // NewDecrypter create a new decrypter attaching the private key to it

@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	crypto "github.com/mailchain/mailchain/crypto"
+	crypto "github.com/mailchain/go-crypto"
 )
 
 // MockPrivateKey is a mock of PrivateKey interface.

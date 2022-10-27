@@ -5,8 +5,8 @@ import (
 	"errors"
 	"io"
 
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/sr25519"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/sr25519"
 )
 
 type SR25519 struct {

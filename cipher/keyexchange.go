@@ -1,6 +1,6 @@
 package cipher
 
-import "github.com/mailchain/mailchain/crypto"
+import "github.com/mailchain/go-crypto"
 
 //go:generate mockgen -source=keyexchange.go -package=ciphertest -destination=./ciphertest/keyexchange_mock.go
 

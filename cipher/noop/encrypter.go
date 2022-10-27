@@ -1,8 +1,8 @@
 package noop
 
 import (
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/cipher"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/cipher"
 )
 
 // NewEncrypter create a new encrypter with crypto rand for reader

@@ -1,8 +1,8 @@
 package sr25519
 
 import (
+	"github.com/mailchain/go-crypto/internal/schnorrkel"
 	"github.com/mailchain/go-encoding/encodingtest"
-	"github.com/mailchain/mailchain/crypto/internal/schnorrkel"
 )
 
 var ( //nolint

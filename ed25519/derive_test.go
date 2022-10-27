@@ -3,9 +3,9 @@ package ed25519
 import (
 	"testing"
 
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/chaincode"
 	"github.com/mailchain/go-encoding/encodingtest"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/chaincode"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

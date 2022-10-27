@@ -6,8 +6,8 @@ import (
 	"io"
 
 	"github.com/agl/ed25519/extra25519"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/ed25519"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/ed25519"
 	"golang.org/x/crypto/curve25519"
 )
 

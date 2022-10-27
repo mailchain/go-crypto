@@ -7,8 +7,8 @@ import (
 	"io"
 
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/secp256k1"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/secp256k1"
 )
 
 type SECP256K1 struct {

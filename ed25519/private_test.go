@@ -7,8 +7,8 @@ import (
 	"testing"
 	"testing/iotest"
 
+	"github.com/mailchain/go-crypto"
 	"github.com/mailchain/go-encoding/encodingtest"
-	"github.com/mailchain/mailchain/crypto"
 	"github.com/stretchr/testify/assert"
 )
 

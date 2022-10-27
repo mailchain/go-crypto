@@ -8,9 +8,9 @@ package secp256k1test
 import (
 	"log"
 
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/secp256k1"
 	"github.com/mailchain/go-encoding/encodingtest"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/secp256k1"
 )
 
 // AlicePrivateKey secp256k1 key for testing purposes. Key is compromised do not use on mainnet's.

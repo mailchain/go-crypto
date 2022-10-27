@@ -3,11 +3,11 @@ package encrypter
 import (
 	"fmt"
 
-	keys "github.com/mailchain/mailchain/crypto"
-	crypto "github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/mailchain/mailchain/crypto/cipher/aes256cbc"
-	"github.com/mailchain/mailchain/crypto/cipher/nacl"
-	"github.com/mailchain/mailchain/crypto/cipher/noop"
+	keys "github.com/mailchain/go-crypto"
+	crypto "github.com/mailchain/go-crypto/cipher"
+	"github.com/mailchain/go-crypto/cipher/aes256cbc"
+	"github.com/mailchain/go-crypto/cipher/nacl"
+	"github.com/mailchain/go-crypto/cipher/noop"
 )
 
 // Cipher Name lookup

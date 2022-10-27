@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/mailchain/mailchain/crypto"
+	"github.com/mailchain/go-crypto"
 )
 
 var (

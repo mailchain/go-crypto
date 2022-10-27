@@ -3,7 +3,7 @@ package sr25519
 import (
 	"testing"
 
-	"github.com/mailchain/mailchain/crypto"
+	"github.com/mailchain/go-crypto"
 	"github.com/stretchr/testify/assert"
 )
 

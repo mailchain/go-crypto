@@ -4,10 +4,10 @@ import (
 	"errors"
 
 	"github.com/agl/ed25519/extra25519"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/ed25519"
-	"github.com/mailchain/mailchain/crypto/secp256k1"
-	"github.com/mailchain/mailchain/crypto/sr25519"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/ed25519"
+	"github.com/mailchain/go-crypto/secp256k1"
+	"github.com/mailchain/go-crypto/sr25519"
 )
 
 func encryptionKeyBytes(privateKey crypto.PrivateKey) ([]byte, error) {

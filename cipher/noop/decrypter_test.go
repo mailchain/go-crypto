@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/mailchain/mailchain/crypto/cipher"
+	"github.com/mailchain/go-crypto/cipher"
 )
 
 func TestNewDecrypter(t *testing.T) {

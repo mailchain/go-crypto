@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/gtank/ristretto255"
-	"github.com/mailchain/mailchain/crypto"
+	"github.com/mailchain/go-crypto"
 )
 
 const (

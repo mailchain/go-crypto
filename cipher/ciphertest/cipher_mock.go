@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	cipher "github.com/mailchain/mailchain/crypto/cipher"
+	cipher "github.com/mailchain/go-crypto/cipher"
 )
 
 // MockDecrypter is a mock of Decrypter interface.

@@ -8,9 +8,9 @@ package sr25519test
 import (
 	"log"
 
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/sr25519"
 	"github.com/mailchain/go-encoding/encodingtest"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/sr25519"
 )
 
 // AlicePrivateKey sr25519 key for testing purposes. Key is compromised do not use on mainnet's.

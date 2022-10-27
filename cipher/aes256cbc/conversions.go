@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/ethereum/go-ethereum/crypto/ecies"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/secp256k1"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/secp256k1"
 )
 
 func asPublicECIES(pk crypto.PublicKey) (*ecies.PublicKey, error) {

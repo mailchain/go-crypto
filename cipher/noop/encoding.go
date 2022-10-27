@@ -3,7 +3,7 @@ package noop
 import (
 	"fmt"
 
-	"github.com/mailchain/mailchain/crypto/cipher"
+	"github.com/mailchain/go-crypto/cipher"
 )
 
 // bytesEncode encode the encrypted data to the hex format

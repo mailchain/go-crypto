@@ -9,8 +9,8 @@ import (
 
 	"github.com/andreburgaud/crypt2go/padding"
 	"github.com/ethereum/go-ethereum/crypto/ecies"
-	"github.com/mailchain/mailchain/crypto"
-	mc "github.com/mailchain/mailchain/crypto/cipher"
+	"github.com/mailchain/go-crypto"
+	mc "github.com/mailchain/go-crypto/cipher"
 )
 
 // NewEncrypter create a new encrypter with crypto rand for reader

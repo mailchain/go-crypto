@@ -4,11 +4,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/mailchain/mailchain/crypto/ed25519"
-	"github.com/mailchain/mailchain/crypto/secp256k1"
-	"github.com/mailchain/mailchain/crypto/sr25519"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/cipher"
+	"github.com/mailchain/go-crypto/ed25519"
+	"github.com/mailchain/go-crypto/secp256k1"
+	"github.com/mailchain/go-crypto/sr25519"
 )
 
 func pubKeyElements(pubKey crypto.PublicKey) (id byte, data []byte, err error) {

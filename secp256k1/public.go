@@ -7,7 +7,7 @@ import (
 
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/crypto/ecies"
-	"github.com/mailchain/mailchain/crypto"
+	"github.com/mailchain/go-crypto"
 )
 
 // PublicKey based on the secp256k1 curve

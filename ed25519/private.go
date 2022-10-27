@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/mailchain/mailchain/crypto"
+	"github.com/mailchain/go-crypto"
 	"golang.org/x/crypto/ed25519"
 )
 

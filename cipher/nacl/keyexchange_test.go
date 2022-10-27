@@ -4,13 +4,13 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/mailchain/mailchain/crypto/cipher/ecdh"
-	"github.com/mailchain/mailchain/crypto/cryptotest"
-	"github.com/mailchain/mailchain/crypto/ed25519/ed25519test"
-	"github.com/mailchain/mailchain/crypto/secp256k1/secp256k1test"
-	"github.com/mailchain/mailchain/crypto/sr25519/sr25519test"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/cipher"
+	"github.com/mailchain/go-crypto/cipher/ecdh"
+	"github.com/mailchain/go-crypto/cryptotest"
+	"github.com/mailchain/go-crypto/ed25519/ed25519test"
+	"github.com/mailchain/go-crypto/secp256k1/secp256k1test"
+	"github.com/mailchain/go-crypto/sr25519/sr25519test"
 	"github.com/stretchr/testify/assert"
 )
 

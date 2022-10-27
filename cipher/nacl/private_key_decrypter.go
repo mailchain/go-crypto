@@ -3,9 +3,9 @@ package nacl
 import (
 	"errors"
 
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/cipher"
-	"github.com/mailchain/mailchain/crypto/multikey"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/cipher"
+	"github.com/mailchain/go-crypto/multikey"
 )
 
 // NewPrivateKeyDecrypter create a new decrypter attaching the private key to it

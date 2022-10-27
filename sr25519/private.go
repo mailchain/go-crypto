@@ -6,8 +6,8 @@ import (
 
 	"github.com/gtank/merlin"
 	"github.com/gtank/ristretto255"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/internal/schnorrkel"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/internal/schnorrkel"
 )
 
 const (

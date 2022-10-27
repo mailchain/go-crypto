@@ -8,10 +8,10 @@ import (
 	"testing"
 	"testing/iotest"
 
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/secp256k1/secp256k1test"
-	"github.com/mailchain/mailchain/crypto/sr25519"
-	"github.com/mailchain/mailchain/crypto/sr25519/sr25519test"
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/secp256k1/secp256k1test"
+	"github.com/mailchain/go-crypto/sr25519"
+	"github.com/mailchain/go-crypto/sr25519/sr25519test"
 	"github.com/stretchr/testify/assert"
 )
 

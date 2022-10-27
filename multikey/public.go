@@ -4,11 +4,11 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/mailchain/go-crypto"
+	"github.com/mailchain/go-crypto/ed25519"
+	"github.com/mailchain/go-crypto/secp256k1"
+	"github.com/mailchain/go-crypto/sr25519"
 	"github.com/mailchain/go-encoding"
-	"github.com/mailchain/mailchain/crypto"
-	"github.com/mailchain/mailchain/crypto/ed25519"
-	"github.com/mailchain/mailchain/crypto/secp256k1"
-	"github.com/mailchain/mailchain/crypto/sr25519"
 )
 
 // PublicKeyFromBytes use the correct function to get the private key from bytes
