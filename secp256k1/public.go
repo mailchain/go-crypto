@@ -2,7 +2,6 @@ package secp256k1
 
 import (
 	"crypto/ecdsa"
-	"crypto/sha256"
 	"fmt"
 
 	ethcrypto "github.com/ethereum/go-ethereum/crypto"
@@ -17,15 +16,10 @@ type PublicKey struct {
 
 // Verify verifies whether sig is a valid signature of message.
 func (pk PublicKey) Verify(message, sig []byte) bool {
-	// VerifySignature requires the signature to be in
-	// [ R || S ] format, so we remove the recid if present.
 	if len(sig) == 65 {
 		sig = sig[:64]
 	}
-
-	hash := sha256.Sum256(message)
-
-	return ethcrypto.VerifySignature(ethcrypto.CompressPubkey(&pk.ecdsa), hash[:], sig)
+	return ethcrypto.VerifySignature(ethcrypto.CompressPubkey(&pk.ecdsa), message[:], sig)
 }
 
 // Bytes returns the byte representation of the public key

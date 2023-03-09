@@ -23,34 +23,6 @@ const (
 	singleKeyMatch = 1
 )
 
-// KeyKindsFromSignature tries to determine the key type from the pubKey, message, sig bytes combination.
-// The key kinds against which the function should match are specified in the keyKinds slice.
-func KeyKindFromSignature(pubKey, message, sig []byte, keyKinds []string) (crypto.PublicKey, error) {
-	matches := make([]crypto.PublicKey, 0, 1)
-
-	keyKinds = removeDuplicates(keyKinds)
-	for _, kind := range keyKinds {
-		key, err := PublicKeyFromBytes(kind, pubKey)
-		if err != nil {
-			// skip invalid key type.
-			continue
-		}
-
-		if key.Verify(message, sig) {
-			matches = append(matches, key)
-		}
-	}
-
-	switch len(matches) {
-	case noKeyMatch:
-		return nil, ErrNoMatch
-	case singleKeyMatch:
-		return matches[0], nil
-	default:
-		return nil, ErrInconclusive
-	}
-}
-
 // GetKeyKindFromBytes extracts the private key type from the publicKey and privateKey.
 // Supported private key types are defined in PossibleKeyKinds variable.
 func GetKeyKindFromBytes(publicKey, privateKey []byte) (crypto.PrivateKey, error) {

@@ -2,6 +2,7 @@ package secp256k1
 
 import (
 	"crypto/ecdsa"
+	"crypto/sha256"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -204,7 +205,8 @@ func TestPublicKey_Verify(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := tt.pk.Verify(tt.message, tt.sig)
+			hash := sha256.Sum256(tt.message)
+			got := tt.pk.Verify(hash[:], tt.sig)
 			if !assert.Equal(t, tt.want, got) {
 				t.Errorf("PublicKey.Verify() = %v, want %v", got, tt.want)
 			}

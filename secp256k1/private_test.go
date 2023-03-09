@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/ecdsa"
 	"crypto/rand"
+	"crypto/sha256"
 	"io"
 	"reflect"
 	"testing"
@@ -238,7 +239,8 @@ func TestPrivateKey_Sign(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.pk.Sign(tt.msg)
+			hash := sha256.Sum256(tt.msg)
+			got, err := tt.pk.Sign(hash[:])
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Sign() error = %v, wantErr %v", err, tt.wantErr)
 				return

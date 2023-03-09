@@ -2,7 +2,6 @@ package secp256k1
 
 import (
 	"crypto/ecdsa"
-	"crypto/sha256"
 	"errors"
 	"fmt"
 	"io"
@@ -35,9 +34,7 @@ func (pk PrivateKey) Bytes() []byte {
 // TODO: remove this sign function
 // Sign signs the message with the private key and returns the signature.
 func (pk PrivateKey) Sign(message []byte) (signature []byte, err error) {
-	hash := sha256.Sum256(message)
-
-	return ethcrypto.Sign(hash[:], &pk.ecdsa)
+	return ethcrypto.Sign(message[:], &pk.ecdsa)
 }
 
 // PublicKey return the public key that is derived from the private key.
