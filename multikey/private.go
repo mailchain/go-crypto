@@ -6,6 +6,7 @@ import (
 	"github.com/mailchain/go-crypto"
 	"github.com/mailchain/go-crypto/ed25519"
 	"github.com/mailchain/go-crypto/secp256k1"
+	"github.com/mailchain/go-crypto/secp256r1"
 	"github.com/mailchain/go-crypto/sr25519"
 )
 
@@ -21,6 +22,8 @@ func PrivateKeyFromBytes(keyType string, data []byte) (crypto.PrivateKey, error)
 		return ed25519.PrivateKeyFromBytes(data)
 	case crypto.KindSR25519:
 		return sr25519.PrivateKeyFromBytes(data)
+	case crypto.KindSECP256R1:
+		return secp256r1.PrivateKeyFromBytes(data)
 	default:
 		return nil, fmt.Errorf("unsupported key type: %q", keyType)
 	}

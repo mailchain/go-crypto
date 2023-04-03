@@ -7,6 +7,7 @@ import (
 	"github.com/mailchain/go-crypto"
 	"github.com/mailchain/go-crypto/ed25519"
 	"github.com/mailchain/go-crypto/secp256k1"
+	"github.com/mailchain/go-crypto/secp256r1"
 	"github.com/mailchain/go-crypto/sr25519"
 	"github.com/mailchain/go-encoding"
 )
@@ -20,6 +21,8 @@ func PublicKeyFromBytes(keyType string, data []byte) (crypto.PublicKey, error) {
 		return ed25519.PublicKeyFromBytes(data)
 	case crypto.KindSR25519:
 		return sr25519.PublicKeyFromBytes(data)
+	case crypto.KindSECP256R1:
+		return secp256r1.PublicKeyFromBytes(data)
 	default:
 		return nil, fmt.Errorf("unsupported curve type")
 	}
@@ -49,6 +52,8 @@ func DescriptivePublicKeyFromBytes(in []byte) (crypto.PublicKey, error) {
 		return ed25519.PublicKeyFromBytes(data)
 	case crypto.IDSR25519:
 		return sr25519.PublicKeyFromBytes(data)
+	case crypto.IDSECP256R1:
+		return secp256r1.PublicKeyFromBytes(data)
 	default:
 		return nil, fmt.Errorf("first byte must identity key curve")
 	}
