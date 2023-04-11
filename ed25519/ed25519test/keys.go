@@ -28,7 +28,7 @@ var CharliePrivateKey crypto.PrivateKey //nolint: gochecknoglobals
 // CharliePublicKey ed25519 key for testing purposes. Key is compromised do not use on mainnet's.
 var CharliePublicKey crypto.PublicKey //nolint: gochecknoglobals
 
-//nolint: gochecknoinits
+// nolint: gochecknoinits
 func init() {
 	var err error
 	AlicePrivateKey, err = ed25519.PrivateKeyFromBytes(encodingtest.MustDecodeHex("0d9b4a3c10721991c6b806f0f343535dc2b46c74bece50a0a0d6b9f0070d3157"))

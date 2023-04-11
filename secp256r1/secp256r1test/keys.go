@@ -27,7 +27,7 @@ var CarlosPrivateKey crypto.PrivateKey //nolint: gochecknoglobals
 // CarlosPublicKey secp256k1 key for testing purposes. Key is compromised do not use on mainnet's.
 var CarlosPublicKey crypto.PublicKey //nolint: gochecknoglobals
 
-//nolint: gochecknoinits
+// nolint: gochecknoinits
 func init() {
 	var err error
 

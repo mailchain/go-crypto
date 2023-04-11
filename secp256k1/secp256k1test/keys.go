@@ -22,7 +22,7 @@ var BobPrivateKey crypto.PrivateKey //nolint: gochecknoglobals
 // BobPublicKey secp256k1 key for testing purposes. Key is compromised do not use on mainnet's.
 var BobPublicKey crypto.PublicKey //nolint: gochecknoglobals
 
-//nolint: gochecknoinits
+// nolint: gochecknoinits
 func init() {
 	var err error
 

@@ -26,7 +26,7 @@ var EvePrivateKey crypto.PrivateKey //nolint: gochecknoglobals test key
 // EvePublicKey sr25519 key for testing purposes. Key is compromised do not use on mainnet's.
 var EvePublicKey crypto.PublicKey //nolint: gochecknoglobals test key
 
-//nolint: gochecknoinits test key
+// nolint: gochecknoinits test key
 func init() {
 	var err error
 	AlicePrivateKey, err = sr25519.PrivateKeyFromBytes(encodingtest.MustDecodeHex("5c6d7adf75bda1180c225d25f3aa8dc174bbfb3cddee11ae9a85982f6faf791a")) //nolint: lll test key
